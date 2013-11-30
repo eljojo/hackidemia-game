@@ -14,6 +14,7 @@
 	var redc='#FF0000'
 	var bluec='#0000FF'
 	var background='#FFF'
+	var speed=5;
 	var c=document.getElementById("myCanvas");
 
 	var ctx=c.getContext("2d");
@@ -25,13 +26,12 @@
 	}
 
 	function redraw() {
-		clean_screen()
 		position()
+		clean_screen()
 		ctx2.fillStyle=bluec;
 		ctx2.fillRect(x,y,75,100);
 		ctx.fillStyle=redc;
 		ctx.fillRect(xr,yr,75,100);
-
 	}
 
 	function newColor() {
@@ -66,21 +66,21 @@
 		}
 
 		if(event.keyCode == keyCodes.s) {
-			y+=5;
+			y+=speed;
 		}else if(event.keyCode == keyCodes.w) {
-			y-=5
+			y-=speed;
 		}else if(event.keyCode == keyCodes.d) {
-			x+=5;
+			x+=speed;
 		}else if(event.keyCode == keyCodes.a) {
-			x-=5;
+			x-=speed;
 		}else if(event.keyCode == keyCodes.k) {
-			yr+=5;
+			yr+=speed;
 		}else if(event.keyCode == keyCodes.i) {
-			yr-=5;
+			yr-=speed;
 		}else if(event.keyCode == keyCodes.l) {
-			xr+=5;
+			xr+=speed;
 		}else if(event.keyCode == keyCodes.j) {
-			xr-=5;
+			xr-=speed;
 		}
 
 		if(y < 0) y = 0;
