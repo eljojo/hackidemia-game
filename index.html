@@ -1,0 +1,105 @@
+<!-- #FF00FF -->
+<!-- #20F0FF -->
+<html>
+<body>
+	<canvas id="myCanvas" width="600" height="450"
+	style="border:1px solid #000000;">
+	</canvas>
+	<script>
+	y=Math.random()*(450-100);
+	x=Math.random()*(600-75);
+	yr=Math.random()*(450-75);
+	xr=Math.random()*(600-75);
+	var redc='#FF0000'
+	var bluec='#0000FF'
+	var background='#FFF'
+	var c=document.getElementById("myCanvas");
+
+	var ctx=c.getContext("2d");
+	var ctx2=c.getContext("2d");
+
+	function clean_screen() {
+		ctx2.fillStyle=background;
+		ctx2.fillRect(0,0,1000, 1000);
+	}
+
+	function redraw() {
+		clean_screen()
+		position()
+		ctx2.fillStyle=bluec;
+		ctx2.fillRect(x,y,75,100);
+		ctx.fillStyle=redc;
+		ctx.fillRect(xr,yr,75,100);
+
+	}
+
+	function newColor() {
+		return '#'+Math.floor(Math.random()*16777215).toString(16);
+	}
+
+	function position() {
+		console.log("y= ", y, "x=", x, "yred=", yr, "xred=", xr);
+		console.log("yr-y=", yr-y, "xr-x", xr-x)
+		if(Math.abs(yr-y) < 100 && Math.abs(xr-x) < 75) {
+			redc=newColor()
+			bluec=newColor()
+			background=newColor()
+		}else{
+			redc='#FF0000'
+			bluec='#0000FF'
+			background='#FFF'
+		}
+	}
+
+	function doKeyDown(event) {
+
+		var keyCodes = {
+			's': 115,
+			'w': 119,
+			'a': 97,
+			'd': 100,
+			'i': 105,
+			'k': 107,
+			'j': 106,
+			'l': 108,
+		}
+
+		if(event.keyCode == keyCodes.s) {
+			y+=5;
+		}else if(event.keyCode == keyCodes.w) {
+			y-=5
+		}else if(event.keyCode == keyCodes.d) {
+			x+=5;
+		}else if(event.keyCode == keyCodes.a) {
+			x-=5;
+		}else if(event.keyCode == keyCodes.k) {
+			yr+=5;
+		}else if(event.keyCode == keyCodes.i) {
+			yr-=5;
+		}else if(event.keyCode == keyCodes.l) {
+			xr+=5;
+		}else if(event.keyCode == keyCodes.j) {
+			xr-=5;
+		}
+
+		if(y < 0) y = 0;
+		if(yr < 0) yr = 0;
+		if(x < 0) x = 0;
+		if(xr < 0) xr = 0;
+		if(y > (450-100)) y = 450-100;
+		if(yr > (450-100)) yr = 450-100;
+		if(x > (600-75)) x = 600-75;
+		if(xr > (600-75)) xr = 600-75;
+
+		redraw()
+
+		// console.log(event.keyCode)
+	}
+
+	window.addEventListener( "keypress", doKeyDown, false )
+
+	clean_screen()
+	redraw()
+	</script>
+</body>
+</html>
